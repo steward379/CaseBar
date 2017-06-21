@@ -334,6 +334,7 @@ var defaultPost = true;
 					postresponsenum: Post.postresponsenum,
 					postowner: Post.postowner,
 					posttype:Post.posttype,
+					poststar:Post.poststar,
 					_id: Post._id,
 				}
 			})
@@ -393,6 +394,7 @@ app.get('/reviewDetail', function(req, res){
 						thisPostdisagree:Post.postdisagree,
 						thisPostresponsenum: Post.postresponsenum,
 						thisPosttype:Post.posttype,
+						thisPoststar:Post.poststar,
 						thisPostneutral: Post.postneutral
 					}
 				})
@@ -1261,6 +1263,8 @@ app.get('/reviewPost', function(req, res){
 	res.render('reviewPost', context);
 });
 app.post('/reviewPost', function(req, res){
+	// console.log("ooooooooooooooooooooo");
+	// console.log(req.body.starnum);
 	Post.update(
 		{ postdate: Date.now() },
 		{ posttitle: req.body.posttitle,
@@ -1269,6 +1273,7 @@ app.post('/reviewPost', function(req, res){
 			postdisagree: 0,
 			postneutral: 0,
 			postresponsenum: 0,
+			poststar: req.body.starnum,
 			posttype: req.body.posttype,
 			postowner:req.session.username},
 			{ upsert: true },
@@ -1371,6 +1376,7 @@ var defaultPost = true;
 						postresponsenum: Post.postresponsenum,
 						postowner: Post.postowner,
 						posttype:Post.posttype,
+						poststar:Post.poststar,
 						_id: Post._id,
 					}
 				})
